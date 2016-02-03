@@ -424,7 +424,7 @@ describe("Cluster", function()
       until(has_failed)
 
       -- The member has now failed, let's bring him up again
-      os.execute("serf agent -node="..node_name.." -rpc-addr="..SERVERS[SERVER_CONFS[2]].cluster_listen_rpc.." -bind="..SERVERS[SERVER_CONFS[2]].cluster_listen.." -event-handler=member-join,member-leave,member-failed,member-update,member-reap,user:kong=/Users/marco/git/kong/"..SERVERS[SERVER_CONFS[2]].nginx_working_dir.."/serf_event.sh > /dev/null &")
+      os.execute("serf agent -profile=local -node="..node_name.." -rpc-addr="..SERVERS[SERVER_CONFS[2]].cluster_listen_rpc.." -bind="..SERVERS[SERVER_CONFS[2]].cluster_listen.." -event-handler=member-join,member-leave,member-failed,member-update,member-reap,user:kong=/Users/marco/git/kong/"..SERVERS[SERVER_CONFS[2]].nginx_working_dir.."/serf_event.sh > /dev/null &")
       -- Now wait until the node becomes active again
       repeat
         local res, status = http_client.get(api_url1.."/cluster")
